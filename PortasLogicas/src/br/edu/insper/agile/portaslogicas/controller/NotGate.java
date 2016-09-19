@@ -1,4 +1,4 @@
-package controller;
+package br.edu.insper.agile.portaslogicas.controller;
 
 public class NotGate extends LogicGate{
 	private InputPin pinA;
