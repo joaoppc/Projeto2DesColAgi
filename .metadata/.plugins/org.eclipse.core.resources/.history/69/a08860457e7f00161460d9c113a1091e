@@ -1,0 +1,24 @@
+package br.edu.insper.agile.controller;
+
+public class AndGateTest {
+	Switch botaoA;
+	Switch botaoB;
+	InputPin pinA;
+	InputPin pinB;
+
+	@Test
+	public void falseFalse() {
+		botaoA = new Switch(false);
+		botaoB = new Switch(false);
+		
+		pinA = new InputPin(botaoA,0);
+		pinB = new InputPin(botaoB,1);
+		
+		AndGate and1 = new AndGate(pinA,pinB);
+		
+		Assert.assertEquals(false, and1.getOutputValue(0));
+	}
+
+		
+}
+

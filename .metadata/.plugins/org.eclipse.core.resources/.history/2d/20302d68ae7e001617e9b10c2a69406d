@@ -1,0 +1,21 @@
+package br.edu.insper.agile.controller;
+
+public class AndGateTest {
+	
+	@Before
+	public void setUp() {
+		Switch botaoA = new Switch(false);
+		Switch botaoB = new Switch(false);
+		
+		InputPin pinA = new InputPin(botaoA, 0);
+		InputPin pinB = new InputPin(botaoB, 1);
+	}
+	
+
+	
+		AndGate and1 = new AndGate(pinA,pinB);
+		
+		
+		System.out.println(and1.getOutputValue(0));
+	
+

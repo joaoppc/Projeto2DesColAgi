@@ -1,0 +1,4 @@
+package br.edu.insper.agile.controller;
+
+public class HalfAdderGate extends LogicGate{
+}
