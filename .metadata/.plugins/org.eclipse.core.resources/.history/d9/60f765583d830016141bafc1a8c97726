@@ -1,0 +1,33 @@
+package br.edu.insper.agile.controller;
+
+import br.edu.insper.agile.vision.MainView;
+import br.edu.insper.agile.model.AndGate;
+import br.edu.insper.agile.model.Switch;
+import br.edu.insper.agile.model.InputPin;
+
+public class MainController implements MainListener {
+	private AndGate andGate;
+	private MainView view;
+
+	public MainController(AndGate andGate, MainView view) {
+		this.andGate = andGate;
+		this.view = view;
+
+		//this.view.setNumber(this.person.getSalary());
+
+		updateView();
+	}
+
+	private void updateView() {
+		
+	}
+
+	@Override
+	public void stateChanged(boolean a, boolean b) {
+		//person.setSalary(number);
+		andGate.setPin(new InputPin(new Switch(a),0),new InputPin(new Switch(b),0));
+
+		updateView();
+	}
+}
+

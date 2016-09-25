@@ -1,0 +1,29 @@
+package br.edu.insper.agile.controller;
+
+import br.edu.insper.agile.vision.MainView;
+import br.edu.insper.agile.model.*;
+import br.edu.insper.agile.model.Switch;
+import br.edu.insper.agile.model.InputPin;
+
+public class MainController implements MainListener {
+	private LogicGate gate;
+	private MainView view;
+
+	public MainController(LogicGate gate, MainView view) {
+		this.gate = gate;
+		this.view = view;
+
+		updateView();
+	}
+
+	private void updateView() {
+		view.setOutputPin(gate.getOutputValue(0));
+		
+	}
+
+	@Override
+	public void stateChanged(boolean a, boolean b,boolean c) {
+		gate.setPin(new InputPin(new Switch(a),0),new InputPin(new Switch(b),1),new InputPin(new Switch(c),1));
+		updateView();
+	}
+}

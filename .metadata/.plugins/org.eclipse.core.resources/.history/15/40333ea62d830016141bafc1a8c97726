@@ -1,0 +1,4 @@
+package br.edu.insper.agile.vision;
+
+public interface MainListener {
+}

@@ -1,0 +1,89 @@
+package br.edu.insper.agile.vision;
+
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import br.edu.insper.agile.controller.MainListener;
+
+public class MainView extends JPanel implements ChangeListener {
+	private static final long serialVersionUID = 1L;
+	
+	
+	private JCheckBox inputPinA;
+	private JCheckBox inputPinB;
+	private JCheckBox outputPin;
+	
+	
+	private JComboBox gateSelector;
+	
+
+	private JLabel label;
+	private List<MainListener> listeners;
+
+	
+	
+	public MainView() {
+		
+		this.inputPinA = new JCheckBox();
+		inputPinA.addChangeListener(this);
+		
+		this.inputPinB = new JCheckBox();
+		inputPinA.addChangeListener(this);
+		
+		this.outputPin = new JCheckBox();
+		
+		//this.gateSelector = new JComboBox();
+		//gateSelector.addActionListener(this);
+
+		
+		this.label = new JLabel();
+
+		this.setPreferredSize(new Dimension(450, 225));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		this.add(this.inputPinA);
+		this.add(this.inputPinB);
+		this.add(this.outputPin);
+		//this.add(this.gateSelector);
+		this.add(this.label);
+
+		
+		this.listeners = new ArrayList<>();
+	}
+	
+	
+	
+
+
+	public void setText(String text) {
+		label.setText(text);
+	}
+
+	public void addMainListener(MainListener listener) {
+		listeners.add(listener);
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent event) {
+		boolean stateA = (boolean) this.inputPinA.isSelected();
+		boolean stateB = (boolean) this.inputPinA.isSelected();
+
+		for(MainListener listener: listeners) {
+			listener.stateChanged(stateA);
+			listener.stateChanged(stateB);
+			
+		}
+	}
+}
+

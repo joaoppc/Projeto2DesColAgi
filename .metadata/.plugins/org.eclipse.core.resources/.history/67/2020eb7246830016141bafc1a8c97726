@@ -1,0 +1,12 @@
+package br.edu.insper.agile.model;
+
+public class Lamp implements Drain{
+	InputPin lamp;
+	
+	public InputPin getInputPin(int index) {
+		return lamp;
+	}
+	
+	
+
+}

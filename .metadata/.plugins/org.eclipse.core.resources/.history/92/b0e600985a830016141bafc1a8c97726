@@ -1,0 +1,99 @@
+package br.edu.insper.agile.vision;
+
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import br.edu.insper.agile.controller.MainListener;
+import br.edu.insper.agile.model.*;
+
+public class MainView extends JPanel implements ChangeListener {
+	private static final long serialVersionUID = 1L;
+	
+	
+	private JCheckBox inputPinA;
+	private JCheckBox inputPinB;
+	private JCheckBox inputPinC;
+	private JCheckBox outputPin;
+	private JCheckBox outputPinCa;
+	
+	
+	private JComboBox gateSelector;
+	
+
+	private JLabel label;
+	private List<MainListener> listeners;
+
+	
+	
+	public MainView() {
+		
+		this.inputPinA = new JCheckBox("Pin A");
+		inputPinA.addChangeListener(this); //toda vez que eu mudar o estado desse checkbox, ele vai ''ouvir''.
+		
+		this.inputPinB = new JCheckBox("Pin B");
+		inputPinA.addChangeListener(this);
+
+		this.inputPinC = new JCheckBox("Pin C (Adders Only)");
+		inputPinA.addChangeListener(this);
+		
+		this.outputPin = new JCheckBox("Out");
+		outputPin.setEnabled(false);
+		
+		this.outputPinCa = new JCheckBox("Carry (Adders only)");
+		outputPinCa.setEnabled(false);
+		
+		JComboBox<LogicGate> gateSelector = new JComboBox<LogicGate>();
+
+		
+		this.label = new JLabel();
+
+		this.setPreferredSize(new Dimension(450, 225));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		this.add(this.inputPinA);
+		this.add(this.inputPinB);
+		this.add(this.inputPinC);
+		this.add(this.outputPin);
+		this.add(this.outputPinCa);
+		//this.add(this.gateSelector);
+		this.add(this.label);
+
+		
+		this.listeners = new ArrayList<>(); //cria lista dos ouvidores...
+	}
+	
+	
+	public void setOutputPin(boolean b) {
+		outputPin.setSelected(b);
+	}
+
+
+	public void setText(String text) {
+		label.setText(text);
+	}
+
+	public void addMainListener(MainListener listener) {
+		listeners.add(listener); //adiciona um ouvidor na lista
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent event) {
+		boolean stateA = (boolean) this.inputPinA.isSelected(); //vai me devolver o estado do pinA
+		boolean stateB = (boolean) this.inputPinB.isSelected(); // " pinB
+		boolean stateC = (boolean) this.inputPinC.isSelected(); // " pinB
+
+		for(MainListener listener: listeners) { //para todos os ouvidores da lista...
+			listener.stateChanged(stateA, stateB,stateC); //...conta para cada um o estado do checkbox InputPinA e InputPinB
+		}
+	}
+}
+

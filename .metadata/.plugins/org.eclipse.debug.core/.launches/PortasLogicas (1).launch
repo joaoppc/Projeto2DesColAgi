@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/PortasLogicas/src/br/edu/insper/agile/controller/PortasLogicas.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="br.edu.insper.agile.controller.PortasLogicas"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="PortasLogicas"/>
+</launchConfiguration>

@@ -1,0 +1,74 @@
+package br.edu.insper.agile.swingdemo;
+
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+
+public class MainView extends JPanel implements ChangeListener {
+	private static final long serialVersionUID = 1L;
+
+	private SpinnerNumberModel spinnerModel;
+	private JLabel label;
+	private List<MainListener> listeners;
+
+	
+	
+	public MainView() {
+		//constroi os elementos (spinner, label) e coloca eles dentro da tela (JPanel)
+		this.spinnerModel = new SpinnerNumberModel();
+
+		
+		this.spinnerModel.setMinimum(0);
+		this.spinnerModel.setMaximum(100);
+		this.spinnerModel.setStepSize(1);
+
+		JSpinner spinner = new JSpinner(this.spinnerModel);
+		spinner.addChangeListener(this);
+
+		
+		this.label = new JLabel();
+
+		setPreferredSize(new Dimension(450, 225));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		add(spinner);
+		add(this.label);
+
+		//cria lista dos listeners
+		this.listeners = new ArrayList<>();
+	}
+	
+	
+	
+
+	public void setNumber(int number) {
+		spinnerModel.setValue(number);
+	}
+
+	public void setText(String text) {
+		label.setText(text);
+	}
+	
+	public void addMainListener(MainListener listener) {
+		listeners.add(listener);
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent event) {
+		int number = (int) this.spinnerModel.getNumber();
+
+		for(MainListener listener: listeners) {
+			listener.numberChanged(number);
+		}
+	}
+}
